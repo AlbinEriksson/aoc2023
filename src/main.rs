@@ -1,6 +1,6 @@
 use std::{env, io::Error};
 
-use solutions::{Solver, day1::Day1};
+use crate::solutions::{day1::Day1, day2::Day2, Solver};
 
 pub mod solutions;
 pub mod util;
@@ -9,7 +9,7 @@ pub mod util;
 enum ProcessNameError {
     NoFile,
     NotUtf8,
-    Io(Error)
+    Io(Error),
 }
 
 impl From<Error> for ProcessNameError {
@@ -20,10 +20,11 @@ impl From<Error> for ProcessNameError {
 
 fn get_process_name() -> Result<String, ProcessNameError> {
     Ok(env::current_exe()?
-        .file_name().ok_or(ProcessNameError::NoFile)?
-        .to_str().ok_or(ProcessNameError::NotUtf8)?
-        .to_owned()
-    )
+        .file_name()
+        .ok_or(ProcessNameError::NoFile)?
+        .to_str()
+        .ok_or(ProcessNameError::NotUtf8)?
+        .to_owned())
 }
 
 fn print_usage() {
@@ -34,7 +35,8 @@ fn run_solver(day: u8, repeat_count: u32) {
     println!("\nSolving day {day}:");
     match day {
         1 => Day1::run(repeat_count),
-        _ => unreachable!()
+        2 => Day2::run(repeat_count),
+        _ => unreachable!(),
     }
 }
 
@@ -43,7 +45,7 @@ fn main() {
     if args.len() <= 1 || args.len() >= 4 {
         return print_usage();
     }
-    
+
     let mut repeat_count: u32 = 1;
     if args.len() >= 3 {
         if let Ok(parsed_repeat_count) = args[2].parse::<u32>() {

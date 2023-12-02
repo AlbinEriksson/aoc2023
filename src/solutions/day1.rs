@@ -1,6 +1,5 @@
 use super::Solver;
 
-#[derive(Debug)]
 pub struct Day1<'a> {
     lines: Vec<&'a str>,
 }
@@ -49,7 +48,9 @@ impl<'a> Solver for Day1<'a> {
         Day1 { lines: vec![] }
     }
 
-    fn reset(&mut self) {}
+    fn reset(&mut self) {
+        self.lines.clear();
+    }
 
     fn parse_input(&mut self) {
         self.lines = INPUT.lines().collect();
