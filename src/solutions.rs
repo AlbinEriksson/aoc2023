@@ -1,5 +1,6 @@
 pub mod day1;
 pub mod day2;
+pub mod day3;
 
 pub trait Solver {
     type Solution1;
@@ -12,7 +13,10 @@ pub trait Solver {
     fn solve_part2(&self) -> Self::Solution2;
     fn print_solutions(&self, part1: Self::Solution1, part2: Self::Solution2);
 
-    fn run(repeat_count: u32) where Self: Sized {
+    fn run(repeat_count: u32)
+    where
+        Self: Sized,
+    {
         let mut solver = Self::new();
         for i in 0..repeat_count {
             solver.parse_input();

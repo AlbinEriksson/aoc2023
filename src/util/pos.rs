@@ -1,11 +1,12 @@
 use std::{
+    cmp::max,
     fmt::{Debug, Display},
     ops::{Add, Div, Mul, Neg, Sub},
 };
 
 use super::number::HasZero;
 
-#[derive(PartialEq, Eq, Clone, Copy, Default, Hash)]
+#[derive(PartialEq, Eq, Clone, Copy, Default, Hash, Debug)]
 pub struct Pos2d<T> {
     pub x: T,
     pub y: T,
@@ -14,6 +15,17 @@ pub struct Pos2d<T> {
 impl<T> Pos2d<T> {
     pub fn new(x: T, y: T) -> Pos2d<T> {
         Pos2d { x, y }
+    }
+
+    /// Adds `x` and `y` with this position's `x` and `y` and returns the result in a new [`Pos2d<T>`].
+    pub fn add(&self, x: T, y: T) -> Pos2d<T>
+    where
+        T: Add<Output = T> + Copy,
+    {
+        Pos2d {
+            x: self.x + x,
+            y: self.y + y,
+        }
     }
 
     /// Returns a new [`Pos2d<T>`] with the absolute values of `x` and `y`.
@@ -25,6 +37,14 @@ impl<T> Pos2d<T> {
             if self.x < T::ZERO { -self.x } else { self.x },
             if self.y < T::ZERO { -self.y } else { self.y },
         )
+    }
+
+    /// Returns the maximum of `x` and `y`.
+    pub fn max(&self) -> T
+    where
+        T: Ord + Copy,
+    {
+        max(self.x, self.y)
     }
 
     /// Returns the sum of `x` and `y`.
