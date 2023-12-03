@@ -1,29 +1,27 @@
 use super::set::Set;
 
 /// Contains a set of `isize` within the range `min..max`.
-/// 
+///
 /// Implemented as a bit field of size `max - min`.
 pub struct IntSet {
     min: isize,
     max: isize,
-    items: Vec<usize>
+    items: Vec<usize>,
 }
 
-impl IntSet
-{
-    pub fn new(min: isize, max: isize) -> IntSet
-    {
+impl IntSet {
+    pub fn new(min: isize, max: isize) -> IntSet {
         let num_items: usize = (max - min).try_into().unwrap();
         let num_items = (num_items + usize::BITS as usize - 1) / usize::BITS as usize;
         IntSet {
             min,
             max,
-            items: vec![0; num_items]
+            items: vec![0; num_items],
         }
     }
 
     /// Returns a tuple of the position a number would have in this [`IntSet`].
-    /// 
+    ///
     /// The first tuple value is the index of a bit field in the `items` Vec, whereas the second value is the bit position
     /// within that bit field.
     fn bit_position(&self, item: isize) -> (usize, usize) {
@@ -43,10 +41,7 @@ impl IntSet
 
     /// Returns the amount of numbers in this [`IntSet`].
     pub fn count(&self) -> usize {
-        self.items
-            .iter()
-            .map(|item| item.count_ones() as usize)
-            .sum()
+        self.items.iter().map(|item| item.count_ones() as usize).sum()
     }
 }
 

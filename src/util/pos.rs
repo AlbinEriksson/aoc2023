@@ -1,11 +1,14 @@
-use std::{fmt::{Debug, Display}, ops::{Add, Div, Mul, Sub, Neg}};
+use std::{
+    fmt::{Debug, Display},
+    ops::{Add, Div, Mul, Neg, Sub},
+};
 
 use super::number::HasZero;
 
 #[derive(PartialEq, Eq, Clone, Copy, Default, Hash)]
 pub struct Pos2d<T> {
     pub x: T,
-    pub y: T
+    pub y: T,
 }
 
 impl<T> Pos2d<T> {
@@ -14,24 +17,13 @@ impl<T> Pos2d<T> {
     }
 
     /// Returns a new [`Pos2d<T>`] with the absolute values of `x` and `y`.
-    pub fn abs(&self) -> Pos2d<T> where
-    T:
-        Neg<Output = T> +
-        PartialOrd<T> +
-        HasZero +
-        Copy
+    pub fn abs(&self) -> Pos2d<T>
+    where
+        T: Neg<Output = T> + PartialOrd<T> + HasZero + Copy,
     {
         Pos2d::new(
-            if self.x < T::ZERO {
-                -self.x
-            } else {
-                self.x
-            },
-            if self.y < T::ZERO {
-                -self.y
-            } else {
-                self.y
-            }
+            if self.x < T::ZERO { -self.x } else { self.x },
+            if self.y < T::ZERO { -self.y } else { self.y },
         )
     }
 
@@ -40,17 +32,13 @@ impl<T> Pos2d<T> {
     /// # Panics
     ///
     /// Panics if `x` or `y` can't be converted into type `S`.
-    pub fn sum<S>(&self) -> S where
-    S:
-        Add<S, Output = S> +
-        TryFrom<T>,
-    <S as TryFrom<T>>::Error:
-        Debug,
-    T:
-        Copy
+    pub fn sum<S>(&self) -> S
+    where
+        S: Add<S, Output = S> + TryFrom<T>,
+        <S as TryFrom<T>>::Error: Debug,
+        T: Copy,
     {
-        <S as TryFrom<T>>::try_from(self.x).unwrap() +
-        <S as TryFrom<T>>::try_from(self.y).unwrap()
+        <S as TryFrom<T>>::try_from(self.x).unwrap() + <S as TryFrom<T>>::try_from(self.y).unwrap()
     }
 }
 
@@ -96,7 +84,7 @@ impl<T: Div<T, Output = T> + Copy> Div<T> for Pos2d<T> {
 pub struct Pos3d<T> {
     pub x: T,
     pub y: T,
-    pub z: T
+    pub z: T,
 }
 
 impl<T> Pos3d<T> {

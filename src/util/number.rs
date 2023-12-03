@@ -2,15 +2,15 @@ use std::ops::{Div, Mul, Rem};
 
 /// Types that implement this trait can be used to calculate the greatest common denominator (GCD) and lowest common multiple
 /// (LCM).
-pub trait Gcd where
-Self:
-    Sized +
-    Mul<Self, Output = Self> +
-    Div<Self, Output = Self> +
-    Rem<Self, Output = Self> +
-    PartialEq<Self> +
-    HasZero +
-    Copy
+pub trait Gcd
+where
+    Self: Sized
+        + Mul<Self, Output = Self>
+        + Div<Self, Output = Self>
+        + Rem<Self, Output = Self>
+        + PartialEq<Self>
+        + HasZero
+        + Copy,
 {
     fn gcd(self, other: Self) -> Self {
         if other == Self::ZERO {
