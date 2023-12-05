@@ -75,10 +75,6 @@ impl<'a> Solver for Day1<'a> {
                 let last_digit = get_real_digit(line, &mut (0..line.len()).rev()).unwrap();
                 first_digit * 10 + last_digit
             })
-            .map(|value| {
-                println!("{value}");
-                value
-            })
             .sum()
     }
 
