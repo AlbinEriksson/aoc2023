@@ -8,7 +8,17 @@ adding to it, wasting even more time. Can't change old habits. 😋
 
 # AoC '23 thoughts
 
-Nothing yet. When the puzzles get hard, I'll write something here.
+Here are my thoughts on the puzzles I consider as challenges.
+
+## Day 5 (If You Give A Seed A Fertilizer)
+
+AoC yet again proving that naive solutions don't scale, unless you want to store 2.4 billion integers at once. I did the math
+on that one. But actually, 2.4 billion is still doable, so someone must've done it.
+
+Instead, I, and likely many other people, stored the seed numbers as ranges and split them when necessary. This way, I ended up
+with 119 ranges consisting of two integers each. That makes 238 integers, which is ten million times less than 2.4 billion.
+
+It's fun to compare a solution to the naive one, and the bigger the difference, the better it feels.
 
 # Usage
 

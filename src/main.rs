@@ -1,6 +1,6 @@
 use std::{env, io::Error};
 
-use crate::solutions::{day1::Day1, day2::Day2, day3::Day3, day4::Day4, Solver};
+use crate::solutions::{day1::Day1, day2::Day2, day3::Day3, day4::Day4, day5::Day5, Solver};
 
 pub mod solutions;
 pub mod util;
@@ -38,6 +38,7 @@ fn run_solver(day: u8, repeat_count: u32) {
         2 => Day2::run(repeat_count),
         3 => Day3::run(repeat_count),
         4 => Day4::run(repeat_count),
+        5 => Day5::run(repeat_count),
         _ => unreachable!(),
     }
 }
